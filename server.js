@@ -1,3 +1,7 @@
+require("dd-trace").init({
+  flushInterval: 0, // flush each trace immediately instead of batching
+});
+
 const http = require("http");
 const { CityIndex } = require("./services/delivery-promise/src/promise/CityIndex");
 const { CityConfig } = require("./services/delivery-promise/src/promise/CityConfig");
