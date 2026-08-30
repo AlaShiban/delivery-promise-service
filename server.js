@@ -54,6 +54,21 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  if (req.method === "GET" && req.url === "/__debug/agent-info") {
+    http.get("http://127.0.0.1:8126/info", (agentRes) => {
+      let data = "";
+      agentRes.on("data", (chunk) => (data += chunk));
+      agentRes.on("end", () => {
+        res.writeHead(agentRes.statusCode, { "Content-Type": "application/json" });
+        res.end(data);
+      });
+    }).on("error", (err) => {
+      res.writeHead(502, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ error: err.message }));
+    });
+    return;
+  }
+
   res.writeHead(404, { "Content-Type": "application/json" });
   res.end(JSON.stringify({ error: "Not found" }));
 });
