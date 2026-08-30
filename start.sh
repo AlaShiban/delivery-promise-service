@@ -10,6 +10,7 @@ export DD_ENV=${DD_ENV:-production}
 export DD_REMOTE_CONFIGURATION_ENABLED=${DD_REMOTE_CONFIGURATION_ENABLED:-true}
 export DD_DYNAMIC_INSTRUMENTATION_ENABLED=${DD_DYNAMIC_INSTRUMENTATION_ENABLED:-true}
 export DD_TRACE_DEBUG=${DD_TRACE_DEBUG:-true}
+export DD_TRACE_STARTUP_LOGS=${DD_TRACE_STARTUP_LOGS:-true}
 
 echo "Starting Datadog Agent..."
 /opt/datadog-agent/bin/agent/agent run -c /etc/datadog-agent/datadog.yaml &
