@@ -5,6 +5,10 @@ export DD_APM_ENABLED=${DD_APM_ENABLED:-true}
 export DD_APM_NON_LOCAL_TRAFFIC=false
 export DD_LOG_LEVEL=${DD_LOG_LEVEL:-info}
 export DD_HOSTNAME=${DD_HOSTNAME:-delivery-promise-service}
+export DD_SERVICE=${DD_SERVICE:-delivery-promise-service}
+export DD_ENV=${DD_ENV:-production}
+export DD_REMOTE_CONFIGURATION_ENABLED=${DD_REMOTE_CONFIGURATION_ENABLED:-true}
+export DD_DYNAMIC_INSTRUMENTATION_ENABLED=${DD_DYNAMIC_INSTRUMENTATION_ENABLED:-true}
 
 echo "Starting Datadog Agent..."
 /opt/datadog-agent/bin/agent/agent run -c /etc/datadog-agent/datadog.yaml &

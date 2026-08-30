@@ -1,5 +1,6 @@
 require("dd-trace").init({
   flushInterval: 0, // flush each trace immediately instead of batching
+  dynamicInstrumentation: { enabled: true },
 });
 
 const http = require("http");

@@ -6,6 +6,6 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "dd-trace": "^5.2.0"
+    "dd-trace": "^5.22.0"
   }
 }
