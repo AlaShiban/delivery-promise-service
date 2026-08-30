@@ -53,8 +53,9 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  if (req.method === "GET" && req.url === "/__debug/agent-info") {
-    http.get("http://127.0.0.1:8126/info", (agentRes) => {
+  if (req.method === "GET" && req.url.startsWith("/__debug/")) {
+    const agentPath = req.url.replace("/__debug", "");
+    http.get(`http://127.0.0.1:8126${agentPath}`, (agentRes) => {
       let data = "";
       agentRes.on("data", (chunk) => (data += chunk));
       agentRes.on("end", () => {
