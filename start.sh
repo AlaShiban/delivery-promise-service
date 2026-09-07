@@ -12,6 +12,13 @@ export DD_DYNAMIC_INSTRUMENTATION_ENABLED=${DD_DYNAMIC_INSTRUMENTATION_ENABLED:-
 export DD_TRACE_DEBUG=${DD_TRACE_DEBUG:-true}
 export DD_TRACE_STARTUP_LOGS=${DD_TRACE_STARTUP_LOGS:-true}
 
+# Render's containers aren't Kubernetes/ECS/etc, but the Agent auto-detects
+# these features from the environment anyway and then spams the logs with
+# failed kubelet/orchestrator/process checks. Turn them off explicitly.
+# Remote Config + the trace-agent (needed for Live Debugger) are untouched.
+export DD_AUTOCONFIG_EXCLUDE_FEATURES=${DD_AUTOCONFIG_EXCLUDE_FEATURES:-kubernetes,kube_orchestratorexplorer,kubelet_config_orchestrator_check,process}
+export DD_PROCESS_CONFIG_ENABLED=${DD_PROCESS_CONFIG_ENABLED:-false}
+
 echo "Starting Datadog Agent..."
 /opt/datadog-agent/bin/agent/agent run -c /etc/datadog-agent/datadog.yaml &
 
