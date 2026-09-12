@@ -1,13 +1,22 @@
 // Node port of com.courier.promise.CityIndex
+
+// Dataset keys are ASCII slugs: "Sao Paulo" becomes "sao paulo". Strip
+// diacritics so accented input ("São Paulo") maps to the same key.
+function normalizeCityKey(cityName) {
+  return cityName
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
+
 class CityIndex {
   constructor() {
     this.cities = new Map();
   }
 
   add(city) {
-    // Dataset keys are ASCII slugs: "Sao Paulo" becomes "sao paulo".
-    const key = city.cityName.trim().toLowerCase();
-    this.cities.set(key, city);
+    this.cities.set(normalizeCityKey(city.cityName), city);
   }
 
   find(lookupKey) {
@@ -15,4 +24,4 @@ class CityIndex {
   }
 }
 
-module.exports = { CityIndex };
+module.exports = { CityIndex, normalizeCityKey };

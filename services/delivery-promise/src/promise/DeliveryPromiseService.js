@@ -1,5 +1,6 @@
 // Node port of com.courier.promise.DeliveryPromiseService
 const { DeliveryPromise } = require("./DeliveryPromise");
+const { normalizeCityKey } = require("./CityIndex");
 
 class DeliveryPromiseService {
   constructor(regionDatasetLoader, cityIndex) {
@@ -9,7 +10,7 @@ class DeliveryPromiseService {
 
   estimate(request) {
     const requestedCity = request.city;
-    const lookupKey = requestedCity.trim().toLowerCase();
+    const lookupKey = normalizeCityKey(requestedCity);
 
     const regionDataset = this.regionDatasetLoader.current();
     const cityConfig = this.cityIndex.find(lookupKey);
@@ -23,7 +24,7 @@ class DeliveryPromiseService {
 
   /** @deprecated Retained for migration compatibility. No known callers. */
   estimateDeliveryTimeV1Legacy(cityName) {
-    const lookupKey = cityName.trim().toLowerCase();
+    const lookupKey = normalizeCityKey(cityName);
     const cityConfig = this.cityIndex.find(lookupKey);
 
     if (!cityConfig) return 10;
