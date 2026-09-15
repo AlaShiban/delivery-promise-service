@@ -20,6 +20,13 @@ export DD_TRACE_STARTUP_LOGS=${DD_TRACE_STARTUP_LOGS:-true}
 # trace-agent (needed for Live Debugger) are untouched.
 export DD_AUTOCONFIG_FROM_ENVIRONMENT=${DD_AUTOCONFIG_FROM_ENVIRONMENT:-false}
 
+# Source code integration: links traces/snippets/logpoints back to the exact
+# commit. Render doesn't expose a way to pass --build-arg into its Docker
+# builds, so these fall back to values baked in at image-build time (see the
+# Dockerfile ARGs) and, failing that, to Render's own git env vars.
+export DD_GIT_REPOSITORY_URL=${DD_GIT_REPOSITORY_URL:-https://github.com/AlaShiban/delivery-promise-service}
+export DD_GIT_COMMIT_SHA=${DD_GIT_COMMIT_SHA:-${RENDER_GIT_COMMIT:-}}
+
 echo "Starting Datadog Agent..."
 /opt/datadog-agent/bin/agent/agent run -c /etc/datadog-agent/datadog.yaml &
 
