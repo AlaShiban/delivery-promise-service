@@ -6,8 +6,6 @@ function normalizeCityKey(cityName) {
   return cityName
     .trim()
     .toLowerCase()
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "");
 }
 
 class CityIndex {

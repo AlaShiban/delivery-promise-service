@@ -15,7 +15,7 @@ class DeliveryPromiseService {
     const regionDataset = this.regionDatasetLoader.current();
     const cityConfig = this.cityIndex.find(lookupKey);
 
-    if (!cityConfig || !cityConfig.cityName) {
+    if (!cityConfig) {
       return DeliveryPromise.fallback(requestedCity, 7);
     }
 
