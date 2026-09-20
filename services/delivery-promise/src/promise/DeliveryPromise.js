@@ -5,6 +5,7 @@ class DeliveryPromise {
     this.deliveryDays = deliveryDays;
     this.currency = currency;
     this.fallback = fallback;
+    this.status = fallback ? "this is a problem" : "this is correct";
   }
 
   static fallback(requestedCity, days) {
